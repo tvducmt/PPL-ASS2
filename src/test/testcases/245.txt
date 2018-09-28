@@ -1,0 +1,7 @@
+procedure ABC ();
+        var x , y : real ; 
+            begin
+                for i:= 1 downto 10 do a := 3; d := 5;
+                if color = red then
+                   a:=3;
+            end

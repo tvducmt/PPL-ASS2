@@ -1,0 +1,5 @@
+procedure call_state();
+            var x , y : real ; 
+            begin
+                foo () 
+            end

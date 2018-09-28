@@ -1,0 +1,5 @@
+procedure compound_state();
+           var x , y : real ; 
+            begin
+                
+            end

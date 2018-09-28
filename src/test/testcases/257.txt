@@ -1,0 +1,5 @@
+procedure continue_state();
+        var x , y : real ; 
+            begin
+                while  a =4 do  continue;;
+            end

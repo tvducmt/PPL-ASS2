@@ -1,0 +1,6 @@
+procedure built_in();
+        var x , y : real ; 
+            d : array [ 1-1 .. 1+1 ] of integer ;
+            begin
+                x := 2;
+            end

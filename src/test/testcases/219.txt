@@ -1,0 +1,5 @@
+procedure abc ();
+            var x , y : real ; 
+            begin
+            
+            end

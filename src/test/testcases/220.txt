@@ -1,0 +1,5 @@
+prOceDure _ADVCDfoo ();
+            var x , y : real ; 
+            begin
+            
+            end

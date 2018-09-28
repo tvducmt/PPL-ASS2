@@ -1,0 +1,6 @@
+procedure with_state();
+        var x , y : real ; 
+            begin
+                with  do
+                    d = 34; 
+            end

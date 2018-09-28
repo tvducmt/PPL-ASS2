@@ -1,0 +1,3 @@
+  float foo() 
+          return foo(2)[arr[]]="string with number 123 + 125235e-369;
+        

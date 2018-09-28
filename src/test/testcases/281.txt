@@ -1,0 +1,5 @@
+procedure built_in();
+        var x , y : real ; 
+            begin
+                putFloat(23.454);
+            end

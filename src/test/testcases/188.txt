@@ -1,0 +1,9 @@
+boolean b; // a variable of type boolean
+                   int i; // a variable of type int
+                   float f; // a variable of type float
+                   boolean ba[5]; // a variable of type array on boolean
+                   int ia[3]; // a variable of type array on int
+                   float fa[100]; // a variable of type array on float
+                   int i=5; //no initialization => int i;
+                   float f[]; //must have size => float f[5];
+                   boolean boo[2]=true,false; //no initialization => boolean boo[2];

@@ -1,0 +1,6 @@
+procedure abc ();
+        var x , y : real ; 
+            begin
+                if +hello then
+                    b:=3;
+            end

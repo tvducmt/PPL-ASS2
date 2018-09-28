@@ -1,0 +1,5 @@
+procedure index_expr();
+         
+            begin
+              c := a[3];
+            end

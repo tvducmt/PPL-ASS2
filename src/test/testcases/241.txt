@@ -1,0 +1,5 @@
+procedure ABC ();
+        var x , y : real ; 
+            begin
+                for i= 1 downto 10 do g:=5;
+            end

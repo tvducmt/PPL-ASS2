@@ -1,0 +1,5 @@
+procedure index_expr();
+         
+            begin
+              c := a[b[2]] +3;
+            end

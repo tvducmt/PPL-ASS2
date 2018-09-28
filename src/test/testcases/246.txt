@@ -1,0 +1,5 @@
+procedure ABC ();
+        var x , y : real ; 
+            begin
+                for 123:= 1 downto 10 do a := 3; d := 5;
+            end

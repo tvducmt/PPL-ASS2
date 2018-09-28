@@ -1,0 +1,5 @@
+procedure abc ();
+        var x , y : real ; 
+            begin
+                some_real := 37573.5 * 37593 + 385.8 / 367.1;
+            end

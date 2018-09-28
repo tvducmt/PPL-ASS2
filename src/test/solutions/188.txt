@@ -1,0 +1,1 @@
+boolean,b,;,int,i,;,float,f,;,boolean,ba,[,5,],;,int,ia,[,3,],;,float,fa,[,100,],;,int,i,=,5,;,float,f,[,],;,boolean,boo,[,2,],=,true,,,false,;,<EOF>

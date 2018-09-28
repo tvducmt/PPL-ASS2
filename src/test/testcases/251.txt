@@ -1,0 +1,5 @@
+procedure whilestate ();
+        var x , y : real ; 
+            begin
+                while  do  s := 234;;
+            end

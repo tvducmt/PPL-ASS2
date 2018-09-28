@@ -1,0 +1,5 @@
+procedure abc ();
+        var x , y : real ; 
+            begin
+                a:=b:=c:=d:=foo(2+3, 3*3, a AND b);
+            end
