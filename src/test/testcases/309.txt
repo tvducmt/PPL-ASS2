@@ -1,4 +1,6 @@
 function foo ():INTEGER; 
+        var x:string;
+            a, b: boolean;
         begin
             
         end

@@ -1,4 +1,4 @@
 function foo ():INTEGER; 
         begin
-            
+             y := (a[10]+3);
         end

@@ -22,7 +22,7 @@ variable : ID (COMMA ID)* COLON vartype SEMI;
 //idlist : ID (COMMA ID)*;
 vartype : primtype | compoundtype ;
 primtype: INTTYPE | STRINGTYPE | BOOLEANTYPE | REALTYPE ;
-compoundtype: ARRAY LSB  expr DD expr  RSB OF primtype;
+compoundtype: ARRAY LSB  INTLIT DD INTLIT  RSB OF primtype;
 funcdeclare : FUNCTION ID LB paramlist RB COLON vartype SEMI varDeclare? cpstate;
 paramlist :  param (SEMI param)* | ;
 param : ID (COMMA ID)* COLON vartype;
@@ -84,33 +84,15 @@ PUTLN: 'putLn';
 //expression
 //exprStmt: expr SEMI;
 exprList: (expr (COMMA expr)*)?;
-expr: expr ANDTHEN expr1
-    | expr ORELSE expr1
-    | expr1;
+expr: expr (ANDTHEN | ORELSE) expr1 | expr1;
 
-expr1: expr2 EQUAL expr2 
-    | expr2 NOTEQUAL expr2
-    | expr2 LESSTHAN expr2
-    | expr2 LESOREQUAL expr2
-    | expr2 GREATERTHAN expr2
-    | expr2 GREOREQUAL expr2 
-    | expr2;
+expr1: expr2 (EQUAL|NOTEQUAL| LESSTHAN|LESOREQUAL|GREATERTHAN |GREOREQUAL) expr2 | expr2;
 
-expr2: expr2 ADDITION expr3 
-    |  expr2 SUBORNE expr3 
-    |  expr2 OR expr3 
-    | expr3;
+expr2: expr2 (ADDITION |SUBORNE | OR) expr3 | expr3;
 
-expr3: expr3 DIVISION expr4
-     | expr3 MULTIPLICATION expr4
-     | expr3 MOD expr4
-     | expr3 AND expr4
-     | expr3 INTDIV expr4
-     | expr4;
+expr3: expr3 (DIVISION |  MULTIPLICATION | MOD | AND | INTDIV) expr4 | expr4;
 
-expr4:  NOT expr4
-     |  SUBORNE expr4
-     |  expr5;
+expr4:  (NOT| SUBORNE) expr4| expr5;
 expr5: expr6 LSB expr RSB
     | expr6;
 expr6: LB expr RB

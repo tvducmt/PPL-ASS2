@@ -1,4 +1,4 @@
 function foo ():INTEGER; 
         begin
-            
+            c := b[10] := 4;
         end

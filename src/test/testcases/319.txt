@@ -1,4 +1,4 @@
 function foo ():INTEGER; 
         begin
-            
+            for i:= 1 to 10 do g:=5;
         end

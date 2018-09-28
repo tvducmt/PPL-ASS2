@@ -1,1 +1,1 @@
-Program(['VarDecl(x,StringType)', 'VarDecl(y,StringType)'])
+Program([FuncDecl(Id(foo),[VarDecl(Id(x),StringType),VarDecl(Id(y),StringType)],IntType,[],[])])

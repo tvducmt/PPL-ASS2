@@ -1,4 +1,4 @@
 function foo ():INTEGER; 
         begin
-            
+            if (x=3) then x := 5; else y := 4;
         end

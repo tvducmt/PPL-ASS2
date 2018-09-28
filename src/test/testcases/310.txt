@@ -1,4 +1,4 @@
 function foo ():INTEGER; 
         begin
-            
+            y := 5;
         end

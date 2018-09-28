@@ -1,4 +1,5 @@
 function foo ():INTEGER; 
+        var x:string;
         begin
             
         end

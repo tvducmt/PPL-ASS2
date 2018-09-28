@@ -1,4 +1,4 @@
 function foo ():INTEGER; 
         begin
-            
+            x := (5+3);
         end

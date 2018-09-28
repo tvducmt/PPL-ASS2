@@ -1,1 +1,4 @@
-var x, y: string;
+function foo (x, y: string):INTEGER; 
+        begin
+            
+        end
