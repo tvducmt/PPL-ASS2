@@ -1,0 +1,4 @@
+function foo ():INTEGER; 
+        begin
+            while x<3 do if (x=3) then x := 5; else y := 4; ;
+        end

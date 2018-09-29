@@ -96,21 +96,22 @@ class ASTGeneration(MPVisitor):
         elif ctx.forState() is not None:
             return self.visit(ctx.forState())
         elif ctx.whileState() is not None:
-            self.visit(ctx.whileState())
+            return self.visit(ctx.whileState())
         elif ctx.breakState() is not None:
-            self.visit(ctx.breakState())
+            return self.visit(ctx.breakState())
         elif ctx.continueState() is not None:
-            self.visit(ctx.continueState())
+            return self.visit(ctx.continueState())
         elif ctx.returnState() is not None:
-            self.visit(ctx.returnState())
+            return self.visit(ctx.returnState())
         elif ctx.callState() is not None:
-            self.visit(ctx.callState())
+            return self.visit(ctx.callState())
         elif ctx.cpstate() is not None:
-            self.visit(ctx.cpstate())
+            return self.visit(ctx.cpstate())
         elif ctx.withState() is not None:
-            self.visit(ctx.withState())
+            return self.visit(ctx.withState())
         else:
-            self.visit(ctx.defaultFunction())
+            print("into here defaultFunction")
+            return self.visit(ctx.defaultFunction())
 
 
     #-------------Stmt ---------------------------------------------
@@ -158,7 +159,37 @@ class ASTGeneration(MPVisitor):
          up = BooleanLiteral(checkDown)
          print(up)
          return For(Id(ctx.ID().getText()), self.visit(ctx.expr(0)),self.visit(ctx.expr(1)), up, loop)
-
+    
+    # whileState : WHILE expr DO stmt;
+    def visitWhileState(self, ctx: MPParser.WhileStateContext):
+        #sl:list(Stmt)
+        #exp: Expr
+         sl = [self.visit(ctx.stmt())]
+         exp = self.visit(ctx.expr())
+         return While(exp, sl)
+    
+    # breakState : BREAK SEMI;
+    def visitBreakState(self, ctx:MPParser.BreakStateContext):
+         return Break()
+    # continueState : CONTINUE SEMI;
+    def visitContinueState(self, ctx:MPParser.ContinueStateContext):
+         return Continue()
+    # returnState : RETURN expr? SEMI;
+    def visitReturnState(self, ctx:MPParser.ReturnStateContext):
+        if ctx.expr():
+            return Return(self.visit(ctx.expr()))
+        return Return(None)
+    # withState : WITH  variable+ DO stmt;
+    def visitWithState(self, ctx:MPParser.WithStateContext):
+        #decl:list(VarDecl)
+        #stmt:list(Stmt)
+        decl = []
+        for item in ctx.variable():
+            for one in self.visit(item):
+                decl.append(str(one))
+        stmt= [self.visit(ctx.stmt())]
+       
+        return With(decl, stmt)
 
 
     # ---------------------------Expression----------------------------------------------

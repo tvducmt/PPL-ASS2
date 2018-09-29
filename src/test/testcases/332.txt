@@ -1,0 +1,4 @@
+function foo ():INTEGER; 
+        begin
+            for i:= 1 downto 10 do CONTINUE;
+        end

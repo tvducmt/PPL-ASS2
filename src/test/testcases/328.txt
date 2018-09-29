@@ -1,0 +1,4 @@
+function foo ():INTEGER; 
+        begin
+            while x<3 do Break;
+        end

@@ -1,0 +1,4 @@
+function foo ():INTEGER; 
+        begin
+            with a, b : string; x : integer; do d := 4;
+        end

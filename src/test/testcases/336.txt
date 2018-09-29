@@ -1,0 +1,4 @@
+function foo ():INTEGER; 
+        begin
+            RETURN x+3;
+        end

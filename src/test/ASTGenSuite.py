@@ -170,48 +170,214 @@ class ASTGenSuite(unittest.TestCase):
     
 
     # forState : FOR ID ASSIGN expr (TO|DOWNTO) expr DO stmt;
-    def test_forState(self):
-        """test_forState"""
-        input = """function foo ():INTEGER; 
-        begin
-            for i:= 1 to 10 do g:=5;
-        end"""
-        expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'),IntLiteral(1),IntLiteral(10),BooleanLiteral(False),[Assign(Id('g'),IntLiteral(5))])], IntType())]))
-        self.assertTrue(TestAST.test(input,expect,319))
+    # def test_forState(self):
+    #     """test_forState"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         for i:= 1 to 10 do g:=5;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'),IntLiteral(1),IntLiteral(10),BooleanLiteral(False),[Assign(Id('g'),IntLiteral(5))])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,319))
     
-    def test_forState_downto(self):
-        """test_forState_downto"""
-        input = """function foo ():INTEGER; 
-        begin
-            for i:= 1 downto 10 do g:=5;
-        end"""
-        expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'),IntLiteral(1),IntLiteral(10),BooleanLiteral(True),[Assign(Id('g'),IntLiteral(5))])], IntType())]))
-        self.assertTrue(TestAST.test(input,expect,320))
+    # def test_forState_downto(self):
+    #     """test_forState_downto"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         for i:= 1 downto 10 do g:=5;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'),IntLiteral(1),IntLiteral(10),BooleanLiteral(True),[Assign(Id('g'),IntLiteral(5))])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,320))
     
     # def test_forState_expr(self):
     #     """test_ifState_with_else"""
     #     input = """function foo ():INTEGER; 
     #     begin
-    #         for i:= 1 downto 10 do g:=5;
+    #         for i:= 1 downto 10 do g:=5+g;
     #     end"""
-    #     expect = str(Program([FuncDecl(Id('foo'),[],[],[If(BinaryOp('>',Id('a'),IntLiteral(3)),[If(BinaryOp('<',Id('a'),IntLiteral(7)),[Assign(Id('b'),BinaryOp('+',Id('b'),IntLiteral(2)))],[Assign(Id('b'),StringLiteral('huhuhu'))])],[])], IntType())]))
-    #     self.assertTrue(TestAST.test(input,expect,318))
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'),IntLiteral(1),IntLiteral(10),BooleanLiteral(True),[Assign(Id('g'),BinaryOp('+',IntLiteral(5),Id('g')))])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,321))
+    
+
+    # whileState : WHILE expr DO stmt;
+    # def test_whileState_expr(self):
+    #     """test_whileState_expr"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do x := 5;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id('foo'),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[Assign(Id('x'),IntLiteral(5))])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,322))
+
+    # def test_whileState_exprs(self):
+    #     """test_whileState_exprs"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do x := y := 5;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id('foo'),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[Assign(Id('x'),IntLiteral(5)), Assign(Id('y'),IntLiteral(5))])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,323))
+    # def test_whileState_loop(self):
+    #     """test_whileState_loop"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do while x<3 do x := 5;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id('foo'),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[While(BinaryOp('<',Id('x'),IntLiteral(3)),[Assign(Id('x'),IntLiteral(5))])])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,324))
+    # def test_ifstmt_inside_whileState(self):
+    #     """test_ifstmt_inside_whileState"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do if (x=3) then x := 5; else y := 4; ;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[If(BinaryOp('=',Id('x'),IntLiteral(3)),[Assign(Id('x'),IntLiteral(5))],[Assign(Id('y'),IntLiteral(4))])])],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,325))
+
+    # def test_forstmt_inside_whileState(self):
+    #     """test_forstmt_inside_whileState"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do if (x=3) then for i:= 1 downto 10 do g:=5+g; 
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[If(BinaryOp('=',Id('x'),IntLiteral(3)),[For(Id('i'), IntLiteral(1),IntLiteral(10),BooleanLiteral(True),[Assign(Id('g'),BinaryOp('+',IntLiteral(5),Id('g')))])],[])])],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,326))
+
+     # Break;
+    # def test_breakStmt(self):
+    #     """test_breakStmt"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         break;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[Break()],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,327))
+    # def test_breakStmt_inside_while(self):
+    #     """test_breakStmt_inside_while"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do Break;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id('foo'),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[Break()])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,328))
+    
+    # def test_breakStmt_inside_for(self):
+    #     """test_breakStmt_inside_for"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         for i:= 1 downto 10 do break;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'), IntLiteral(1),IntLiteral(10),BooleanLiteral(True),[Break()])],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,329))
+
+    # # continueState : CONTINUE SEMI;
+    # def test_continueState(self):
+    #     """test_continueState"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         CONTINUE;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[Continue()],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,330))
+    # def test_continueState_inside_while(self):
+    #     """test_continueState_inside_while"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do CONTINUE;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id('foo'),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[Continue()])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,331))
+    
+    # def test_continueState_inside_for(self):
+    #     """test_continueState_inside_for"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         for i:= 1 downto 10 do CONTINUE;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'), IntLiteral(1),IntLiteral(10),BooleanLiteral(True),[Continue()])],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,332))
+    
+    # returnState : RETURN expr? SEMI;
+    # def test_returnState(self):
+    #     """test_returnState"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         RETURN;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[Return()],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,333))
+    # def test_returnState_inside_while(self):
+    #     """test_returnState_inside_while"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do RETURN;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id('foo'),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[Return()])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,334))
+    
+    # def test_returnState_inside_for(self):
+    #     """test_returnState_inside_for"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         for i:= 1 downto 10 do RETURN;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'), IntLiteral(1),IntLiteral(10),BooleanLiteral(True),[Return()])],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,335))
+    # def test_returnState_expr(self):
+    #     """test_returnState"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         RETURN x+3;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[Return(BinaryOp('+',Id('x'),IntLiteral(3)))],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,336))
+    # def test_returnState_expr_inside_while(self):
+    #     """test_returnState_inside_while"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         while x<3 do RETURN x+3;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id('foo'),[],[],[While(BinaryOp('<',Id('x'),IntLiteral(3)),[Return(BinaryOp('+',Id('x'),IntLiteral(3)))])], IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,337))
+    
+    # def test_returnState_expr_inside_for(self):
+    #     """test_returnState_inside_for"""
+    #     input = """function foo ():INTEGER; 
+    #     begin
+    #         for i:= 1 downto 10 do RETURN 5;
+    #     end"""
+    #     expect = str(Program([FuncDecl(Id("foo"),[],[],[For(Id('i'), IntLiteral(1),IntLiteral(10),BooleanLiteral(True),[Return(IntLiteral(5))])],IntType())]))
+    #     self.assertTrue(TestAST.test(input,expect,338))
+
+    #  withState : WITH  variable+ DO stmt;
+    def test_withState(self):
+        """test_withState"""
+        input = """function foo ():INTEGER; 
+        begin
+            with a : string; do d := 4;
+        end"""
+        expect = str(Program([FuncDecl(Id("foo"),[],[],[With([VarDecl(Id('a'),StringType())],[Assign(Id('d'),IntLiteral(4))])],IntType())]))
+        self.assertTrue(TestAST.test(input,expect,339))
+    def test_withState_var(self):
+        """test_withState_var"""
+        input = """function foo ():INTEGER; 
+        begin
+            with a, b, x : string; do d := 4;
+        end"""
+        expect = str(Program([FuncDecl(Id("foo"),[],[],[With([VarDecl(Id('a'),StringType()),VarDecl(Id('b'),StringType()),VarDecl(Id('x'),StringType())],[Assign(Id('d'),IntLiteral(4))])],IntType())]))
+        self.assertTrue(TestAST.test(input,expect,400))
+    def test_withState_vars(self):
+        """test_withState_vars"""
+        input = """function foo ():INTEGER; 
+        begin
+            with a, b : string; x : integer; do d := 4;
+        end"""
+        expect = str(Program([FuncDecl(Id("foo"),[],[],[With([VarDecl(Id('a'),StringType()),VarDecl(Id('b'),StringType()),VarDecl(Id('x'),IntType())],[Assign(Id('d'),IntLiteral(4))])],IntType())]))
+        self.assertTrue(TestAST.test(input,expect,401))
+
 
     #------------------------ End test Funcdeclar -----------------
 
 
 
 
-    # def test_call_without_parameter(self):
-    #     """More complex program"""
-    #     input = """procedure main (); begin
-    #         getIntLn();
-    #     end
-    #     function foo ():INTEGER; begin
-    #         putIntLn(4);
-    #     end"""
-    #     expect = str(Program([
-    #             FuncDecl(Id("main"),[],[],[CallStmt(Id("getIntLn"),[])]),
-    #             FuncDecl(Id("foo"),[],[],[CallStmt(Id("putIntLn"),[IntLiteral(4)])],IntType())]))
-    #     self.assertTrue(TestAST.test(input,expect,302))
    
